@@ -274,12 +274,25 @@ def solve_maze():
             stack.pop()
 
     return []
+  
+# ---------------- DRAW FINAL PATH ---------------- #
+def draw_path(path):
+    """Draw the final solution path (green)"""
+    for (r, c) in path:
+        x, y = cell_to_screen(r, c)
+        path_t.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
+        path_t.stamp()
+
+        wn.update()
+        time.sleep(0.01)
         
 # ---------------- RUN ---------------- #
 generate_maze()
 choose_start_end()
 draw_maze()
 draw_start_end()
+wn.update()
 
 solution = solve_maze()
+draw_path(solution)
 wn.mainloop()
