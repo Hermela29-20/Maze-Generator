@@ -131,5 +131,68 @@ def draw_maze():
         x, y = cell_to_screen(r, 0)
         draw_line(x, y, x, y - CELL_SIZE)
 
+# ---------------- MAZE GENERATION ---------------- #
+def generate_maze():
+    """
+    Generate maze using DFS + stack (backtracking).
+    This simulates the "mouse eating walls".
+    """
+
+    stack = []
+
+    # Start from a random cell
+    r = random.randint(0, ROWS-1)
+    c = random.randint(0, COLS-1)
+
+    visited[r][c] = True
+    stack.append((r, c))
+
+    while stack:
+        r, c = stack[-1]
+
+        # Move generation mouse
+        x, y = cell_to_screen(r, c)
+        gen_mouse.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
+
+        neighbors = []
+
+        # Check all 4 directions for unvisited neighbors
+        if r > 0 and not visited[r-1][c]:
+            neighbors.append((r-1, c, "N"))
+        if c < COLS-1 and not visited[r][c+1]:
+            neighbors.append((r, c+1, "E"))
+        if r < ROWS-1 and not visited[r+1][c]:
+            neighbors.append((r+1, c, "S"))
+        if c > 0 and not visited[r][c-1]:
+            neighbors.append((r, c-1, "W"))
+
+        if neighbors:
+            # Choose random neighbor
+            nr, nc, d = random.choice(neighbors)
+
+            # Remove wall between cells ("eat wall")
+            if d == "N":
+                northWall[r][c] = 0
+            elif d == "E":
+                eastWall[r][c] = 0
+            elif d == "S":
+                northWall[nr][nc] = 0
+            elif d == "W":
+                eastWall[nr][nc] = 0
+
+            visited[nr][nc] = True
+            stack.append((nr, nc))
+        else:
+            # Dead end → backtrack
+            stack.pop()
+
+       
+        draw_maze()
+        wn.update()
+        time.sleep(0.02)
+        
+        
+# ---------------- RUN ---------------- #
+generate_maze()
 
 wn.mainloop()
