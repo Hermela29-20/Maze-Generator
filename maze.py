@@ -191,6 +191,37 @@ def generate_maze():
         wn.update()
         time.sleep(0.02)
         
+# ---------------- START & END ---------------- #
+def choose_start_end():
+    """Place start on left edge and end on right edge"""
+    global start, end
+
+    start = (random.randint(0, ROWS-1), 0)
+    end   = (random.randint(0, ROWS-1), COLS-1)
+
+    # Open exit wall on right side
+    r, c = end
+    eastWall[r][c] = 0
+
+def draw_start_end():
+    """Draw start (green) and end (yellow)"""
+    start_t = turtle.Turtle()
+    start_t.shape("circle")
+    start_t.color("lime")
+    start_t.penup()
+
+    r, c = start
+    x, y = cell_to_screen(r, c)
+    start_t.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
+
+    end_t = turtle.Turtle()
+    end_t.shape("circle")
+    end_t.color("yellow")
+    end_t.penup()
+
+    r, c = end
+    x, y = cell_to_screen(r, c)
+    end_t.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
         
 # ---------------- RUN ---------------- #
 generate_maze()
