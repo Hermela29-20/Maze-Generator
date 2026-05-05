@@ -82,4 +82,26 @@ visited = [[False]*COLS for _ in range(ROWS)]
 start = None
 end = None
 
+# ---------------- HELPERS ---------------- #
+
+def cell_to_screen(r, c):
+    """
+    Converts grid coordinates (row, col)
+    into screen coordinates (x, y)
+    """
+    x = -600 + c * CELL_SIZE
+    y = 300 - r * CELL_SIZE
+    return x, y
+
+
+def draw_line(x1, y1, x2, y2):
+    """
+    Draws a single wall segment on screen
+    using the wall turtle
+    """
+    wall_t.goto(x1, y1)
+    wall_t.pendown()
+    wall_t.goto(x2, y2)
+    wall_t.penup()
+
 wn.mainloop()
