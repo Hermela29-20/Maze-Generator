@@ -104,4 +104,32 @@ def draw_line(x1, y1, x2, y2):
     wall_t.goto(x2, y2)
     wall_t.penup()
 
+# ---------------- DRAW MAZE ---------------- #
+def draw_maze():
+    """Draw the entire maze based on wall arrays"""
+    wall_t.clear()
+
+    for r in range(ROWS):
+        for c in range(COLS):
+            x, y = cell_to_screen(r, c)
+
+            # Draw NORTH wall
+            if northWall[r][c] == 1:
+                draw_line(x, y, x + CELL_SIZE, y)
+
+            # Draw EAST wall
+            if eastWall[r][c] == 1:
+                draw_line(x + CELL_SIZE, y, x + CELL_SIZE, y - CELL_SIZE)
+
+    # Draw bottom border
+    for c in range(COLS):
+        x, y = cell_to_screen(ROWS-1, c)
+        draw_line(x, y - CELL_SIZE, x + CELL_SIZE, y - CELL_SIZE)
+
+    # Draw left border
+    for r in range(ROWS):
+        x, y = cell_to_screen(r, 0)
+        draw_line(x, y, x, y - CELL_SIZE)
+
+
 wn.mainloop()
