@@ -222,10 +222,64 @@ def draw_start_end():
     r, c = end
     x, y = cell_to_screen(r, c)
     end_t.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
+    
+    # ---------------- SOLVER ---------------- #
+def solve_maze():
+    """Solve maze using backtracking (DFS)"""
+
+    stack = [start]
+    visited2 = set()
+
+    while stack:
+        r, c = stack[-1]
+        visited2.add((r, c))
+
+        # Move solver mouse
+        x, y = cell_to_screen(r, c)
+        solver_mouse.goto(x + CELL_SIZE/2, y - CELL_SIZE/2)
+
+        wn.update()
+        time.sleep(0.05)
+
+        # Goal reached
+        if (r, c) == end:
+            return stack
+
+        moved = False
+        directions = ["N","E","S","W"]
+        random.shuffle(directions)
+
+        for d in directions:
+            nr, nc = r, c
+
+            if d == "N" and r > 0 and northWall[r][c] == 0:
+                nr -= 1
+            elif d == "E" and c < COLS-1 and eastWall[r][c] == 0:
+                nc += 1
+            elif d == "S" and r < ROWS-1 and northWall[r+1][c] == 0:
+                nr += 1
+            elif d == "W" and c > 0 and eastWall[r][c-1] == 0:
+                nc -= 1
+
+            if (nr, nc) not in visited2:
+                stack.append((nr, nc))
+                moved = True
+                break
+
+        if not moved:
+            # Dead end → mark blue
+            dx, dy = cell_to_screen(r, c)
+            dead_t.goto(dx + CELL_SIZE/2, dy - CELL_SIZE/2)
+            dead_t.stamp()
+            stack.pop()
+
+    return []
         
 # ---------------- RUN ---------------- #
 generate_maze()
 choose_start_end()
 draw_maze()
 draw_start_end()
+
+solution = solve_maze()
 wn.mainloop()
