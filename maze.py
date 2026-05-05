@@ -50,5 +50,36 @@ path_t.color("green")
 path_t.penup()
 path_t.speed(0)
 
+# ---------------- DATA STRUCTURE ---------------- #
+"""
+Maze Representation :
+
+northWall[r][c]:
+    = 1 → the cell (r, c) has a solid NORTH wall
+    = 0 → the north wall has been removed
+
+eastWall[r][c]:
+    = 1 → the cell (r, c) has a solid EAST wall
+    = 0 → the east wall has been removed
+
+- Only store TWO walls per cell (North and East)
+- This avoids redundancy and saves memory
+
+Wall relationships:
+- SOUTH wall of (r, c) = northWall[r+1][c]
+- WEST wall of (r, c)  = eastWall[r][c-1]
+
+"""
+
+# Initialize all walls as PRESENT (1 = wall exists)
+northWall = [[1]*COLS for _ in range(ROWS)]
+eastWall  = [[1]*COLS for _ in range(ROWS)]
+
+# Track visited cells during maze generation
+visited = [[False]*COLS for _ in range(ROWS)]
+
+# Start and End placeholders (will be set later)
+start = None
+end = None
 
 wn.mainloop()
