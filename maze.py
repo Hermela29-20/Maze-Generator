@@ -225,5 +225,7 @@ def draw_start_end():
         
 # ---------------- RUN ---------------- #
 generate_maze()
-
+choose_start_end()
+draw_maze()
+draw_start_end()
 wn.mainloop()
