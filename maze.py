@@ -9,7 +9,7 @@ CELL_SIZE = 24             # Size of each cell
 # ---------------- SCREEN ---------------- #
 wn = turtle.Screen()
 wn.bgcolor("black")
-wn.title("Maze Generator & Solver (DFS - Animated)")
+wn.title("Maze Generator & Solver")
 wn.setup(1300, 700)
 wn.tracer(0)  
 
