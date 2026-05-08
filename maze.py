@@ -22,28 +22,28 @@ wall_t.speed(0)
 wall_t.color("white")
 wall_t.penup()
 
-# 🟠 Generation mouse (will build maze later)
+#  Generation mouse (will build maze later)
 gen_mouse = turtle.Turtle()
 gen_mouse.shape("circle")
 gen_mouse.color("orange")
 gen_mouse.penup()
 gen_mouse.speed(0)
 
-# 🔴 Solver mouse (will solve maze later)
+#  Solver mouse (will solve maze later)
 solver_mouse = turtle.Turtle()
 solver_mouse.shape("circle")
 solver_mouse.color("red")
 solver_mouse.penup()
 solver_mouse.speed(0)
 
-# 🔵 Dead-end marker (for solver)
+# Dead-end marker (for solver)
 dead_t = turtle.Turtle()
 dead_t.shape("square")
 dead_t.color("blue")
 dead_t.penup()
 dead_t.speed(0)
 
-# 🟢 Final path marker
+#  Final path marker
 path_t = turtle.Turtle()
 path_t.shape("square")
 path_t.color("green")
