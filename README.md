@@ -1,5 +1,7 @@
 # Maze Generator and Solver (Backtracking DFS Algorithm)
 
+Demo recording(loom recording): https://www.loom.com/share/fc210e53d0b2494a9a50be579d50b662
+
 ## Overview of the Project
 
 The presented project represents a visually represented maze generator and solver made in Python and Python Turtle Graphics library.
@@ -19,7 +21,6 @@ The maze created through this project is a **proper maze** because:
 - There exists a single unique path from any point to another
 - It contains no isolated areas
 
----
 
 # Used Technologies
 
@@ -28,12 +29,11 @@ The maze created through this project is a **proper maze** because:
 - DFS (Depth First Search)
 - Stack
 
----
 
 # Maze Representation
 
 The maze consists of two wall arrays:
 
-```python
+ python
 northWall[r][c]
 eastWall[r][c]
